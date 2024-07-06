@@ -15,7 +15,6 @@
     "build": {
       "env": {
         "NODE_ENV": "production"
-      },
-      "installCommand": "npm i --force"
+      }
     }
   }
