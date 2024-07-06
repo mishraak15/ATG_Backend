@@ -12,7 +12,7 @@ const { fetchJobs } = require("../controllers/postController");
 
 router.get("/", ((req,res,next)=>{
      res.json({msg:"OK"});
-});
+}));
 
 router.post("/signup", signup);
 
