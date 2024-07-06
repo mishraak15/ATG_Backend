@@ -12,6 +12,5 @@
       "dest": "/server.js"
     }
   ],
-  "installCommand": "npm i --force",
-  "start": "node server.js"
+  "installCommand": "npm i --force"
 }
