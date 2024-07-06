@@ -20,7 +20,7 @@ const {
 } = require("../controllers/userController");
 
 const upload = multer({ storage });
-const { protect } = require("../controllers/authController");
+const { protect, updatePassword } = require("../controllers/authController");
 
 router.get("/:userid/checkStatus", checkStatus);
 
@@ -58,5 +58,7 @@ router.get("/:userid/fetchFriends", fetchFriends);
 router.post("/:userid/removeFromFavorites", removeFromFavorites);
 
 router.post("/:userid/removeFromSaved", removeFromSaved);
+
+router.post("/:userid/changePassword", updatePassword);
 
 module.exports = router;

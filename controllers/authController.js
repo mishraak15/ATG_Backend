@@ -265,13 +265,15 @@ const verifyEmailHandler = catchAsync(async (req, res, next) => {
 });
 
 const updatePassword = catchAsync(async (req, res, next) => {
+  let { oldPassword, newPassword } = req.body;
   const user = await User.findById(req.user.id).select("+password");
   //2)check if posted password is correct
-  if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
+  if (!(await user.correctPassword(oldPassword, user.password))) {
     return next(new AppError("Your current password is wrong", 401));
   }
+
   //3)if so, update password
-  user.password = req.body.password;
+  user.password = newPassword;
   await user.save();
   createSendToken(user, 200, res);
 });
