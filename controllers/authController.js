@@ -20,9 +20,9 @@ const createSendToken = (user, statusCode, res) => {
     ),
     //so that data cannot be modified in cookie
     httpOnly: true,
+    secure: process?.env?.NODE_ENV === "production",
+    sameSite: 'None',
   };
-
-  if (process.env?.NODE_ENV === "production") cookieOptions.secure = true;
 
   res.cookie("jwt", token, cookieOptions);
   user.password = undefined;
@@ -107,8 +107,10 @@ const login = catchAsync(async (req, res, next) => {
 
 const logout = (req, res) => {
   res.cookie("jwt", "loggedout", {
-    expires: new Date(Date.now() + 10 * 1000),
+    expires: new Date(0),
     httpOnly: true,
+    secure: process.env.NODE_ENV === 'production', 
+    sameSite: 'None' 
   });
   res.status(200).json({ msg: "OK" });
 };
